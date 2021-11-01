@@ -1,10 +1,10 @@
-from fastapi import \
-    FastAPI, \
-    HTTPException
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import uvicorn
-import httpx
+import movie_data
 
+from service.models.movie_model import \
+    MovieModel
 
 app = FastAPI()
 
@@ -37,30 +37,16 @@ def get_usuario_por_id(id: int):
 
     raise HTTPException(status_code=404, detail="Usuário não encontrado")
 
-@app.get("/movie")
+@app.get("/movie/{title}", response_model=MovieModel)
 async def movie_search(title: str):
-    movie = await get_movie(title)
+    movie = await movie_data.get_movie(title)
 
     if not movie:
         raise HTTPException(status_code=404, detail="Filme não encontrado")
 
-    return movie
+    return movie.dict()
 
-async def get_movie(title_subtext: str):
-    url = f"https://movieservice.talkpython.fm/api/search/{title_subtext}"
 
-    async with httpx.AsyncClient() as client:
-        resp: httpx.Response = await client.get(url)
-        resp.raise_for_status()
-
-        data = resp.json()
-
-    results = data['hits']
-    if not results:
-        return None
-
-    movie = results[0]
-    return movie
 
 if __name__ == "__main__":
     dev = 1

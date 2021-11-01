@@ -3,20 +3,14 @@ from pydantic import BaseModel
 import uvicorn
 import movie_data
 
-from service.models.movie_model import \
-    MovieModel
+from service.models.movie_model import MovieModel
+from service.models.usuario import Usuario
 
 app = FastAPI()
 
 @app.get("/")
 def raiz():
     return {"Olá": "Mundo"}
-
-# Criar model
-class Usuario(BaseModel):
-    id: int
-    email: str
-    senha: str
 
 base_de_dados = [
     Usuario(id=1, email="user1@email.com", senha="123"),

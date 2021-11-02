@@ -2,7 +2,7 @@ from typing import Optional
 
 import httpx
 
-from service.models.movie_model import MovieModel
+from models.movie_model import MovieModel
 
 
 async def get_movie(title_subtext: str) -> Optional[MovieModel]:

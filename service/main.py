@@ -1,10 +1,8 @@
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
 import uvicorn
 import movie_data
-
-from service.models.movie_model import MovieModel
-from service.models.usuario import Usuario
+from models.usuario import Usuario
+from models.movie_model import MovieModel
 
 app = FastAPI()
 
@@ -45,4 +43,4 @@ async def movie_search(title: str):
 if __name__ == "__main__":
     dev = 1
     if dev == 1:
-        uvicorn.run('main:app', host="127.0.0.1", port=5000, log_level="info", reload=True, debug=True)
+        uvicorn.run('main:app', host="127.0.0.1", port=8000, log_level="info", reload=True, debug=True)

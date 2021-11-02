@@ -13,6 +13,7 @@ async def get_movie(title_subtext: str) -> Optional[MovieModel]:
         resp.raise_for_status()
 
         data = resp.json()
+        print(data)
 
     results = data['hits']
     if not results:

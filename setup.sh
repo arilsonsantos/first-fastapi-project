@@ -11,11 +11,11 @@ pip3 install -r /app/requirements.txt
 
 cp ./service/ /app
 
-/usr/local/bin/gunicorn \
-  -b 0.0.0.0 80 \
-  -w 4
-  -k uvicorn.works.UvicornWorker main:app
-  --chdir /app
+#/usr/local/bin/gunicorn \
+#  -b 0.0.0.0 80 \
+#  -w 4
+#  -k uvicorn.works.UvicornWorker main:app
+#  --chdir /app
 
 
 
